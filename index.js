@@ -34,6 +34,11 @@ io.on('connection', (socket) => {
     socket.emit('put ID', {id: newPlayer.id , users: gm.getUsersJson()});
 
     
+    socket.on('chat message', ({message, playerId}) => {
+
+        console.log(message, playerId);
+        socket.broadcast.emit('message recept', {message, playerId});
+    });
 
     socket.on('user joined', (msg) => {
         //console.log("mensaje llegó al servidor : " + msg);
